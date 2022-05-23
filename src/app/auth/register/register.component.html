@@ -1,6 +1,9 @@
 <div class="container justify-content-center">
   <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <h1 class="h3 mb-3 font-weight-normal">Please Register</h1>
+
+    <div *ngIf="registerForm.hasError('notSame')" class="alert alert-danger" role="alert">Password and Password should be the same</div>
+
     <div class="form-group">
       <label for="inputUsername" class="sr-only">Username</label>
       <input type="text" id="inputUsername" [formControlName]="'username'" class="form-control" placeholder="Username" required="" autofocus="">

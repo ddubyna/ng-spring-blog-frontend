@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {RegisterPayload} from '../register-payload';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {ValidatorFn} from '@angular/forms/src/directives/validators';
 
 @Component({
   selector: 'app-register',
@@ -13,13 +14,27 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   registerPayload: RegisterPayload;
+  checkPasswords: ValidatorFn;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router:Router) {
+    this.checkPasswords = (group: AbstractControl):  ValidationErrors | null => {
+      const pass = group.get('password').value;
+      const confirmPass = group.get('confirmPassword').value;
+
+      if (pass === '' || confirmPass === '') {
+        return null;
+      }
+
+      return (pass === confirmPass) ? null : { notSame: true };
+    };
+
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
+    }, {
+      validators: this.checkPasswords
     });
     this.registerPayload = {
       username: '',
