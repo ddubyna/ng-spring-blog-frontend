@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   loginPayload: LoginPayload;
+  errorMessage: string;
+  forbidden = false;
 
   constructor(private authService: AuthService, private router: Router) {
     this.loginForm = new FormGroup({
@@ -38,7 +40,12 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home');
       } else {
         console.log('Login failed');
+        this.forbidden = true;
       }
-    });
+    },
+      (error) => {
+        this.errorMessage = error;
+        this.forbidden = true;
+     });
   }
 }
