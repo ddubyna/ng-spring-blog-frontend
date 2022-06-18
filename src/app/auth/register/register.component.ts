@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
 
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', Validators.email],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     }, {
