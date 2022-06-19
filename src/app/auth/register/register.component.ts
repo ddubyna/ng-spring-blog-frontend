@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {RegisterPayload} from '../register-payload';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
@@ -29,10 +29,10 @@ export class RegisterComponent implements OnInit {
     };
 
     this.registerForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      username: ['',  Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
       email: ['', Validators.email],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required]
+      password: ['', Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)],
+      confirmPassword: ['', Validators.pattern(/^(\s+\S+\s*)*(?!\s).*$/)]
     }, {
       validators: this.checkPasswords
     });
