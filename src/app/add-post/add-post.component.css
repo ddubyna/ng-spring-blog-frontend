@@ -9,3 +9,8 @@
 .post-content, .post-title{
   color: royalblue;
 }
+
+form.ng-touched editor.ng-invalid {
+  border: solid 1px red;
+  background: #ffd6db;
+}

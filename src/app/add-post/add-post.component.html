@@ -4,6 +4,9 @@
       <h3 class="new-post-title">Create New Post</h3>
     </div>
     <hr>
+
+    <div *ngIf="addPostForm.touched && !addPostForm.valid" class="alert alert-danger" role="alert">Post can’t be empty. Fill the fields marked by asterisks.</div>
+
     <form [formGroup]="addPostForm" (ngSubmit)="addPost()">
       <div class="form-group">
         <label class="post-title">Title</label>

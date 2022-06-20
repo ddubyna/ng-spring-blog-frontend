@@ -15,3 +15,8 @@ html {
   font-size: 20px;
   text-rendering: optimizeLegibility;
 }
+
+form.ng-touched input.ng-invalid {
+  border: solid 1px red;
+  background: #ffd6db;
+}
