@@ -6,7 +6,7 @@
         <div>
           <i class="fas fa-user"></i> Author: <p>{{post.username}}</p>
         </div>
-        <p [innerHTML]="post.content"></p>
+        <div [innerHTML]="post.content" class="text"></div>
         <div>
           <a type="button" href="/post/{{post.id}}" class="read-more btn btn-default">Read More</a>
         </div>
